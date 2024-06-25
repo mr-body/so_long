@@ -31,6 +31,8 @@ typedef struct s_data {
     int win_heigth;
     int img_x;
     int img_y;
+	int coin;
+	int score;
     t_map *map;
 } t_data;
 
