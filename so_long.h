@@ -2,8 +2,6 @@
 #define SO_LONG_H
 
 #include "minilibx/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -18,14 +16,13 @@ typedef struct s_map{
 	void *img;
 	int	 pos_x;
 	int  pos_y;
-	int  value;
+	char  value;
 } t_map;
 
 
 typedef struct s_data {
     void *mlx;
     void *win;
-    void *textures[5];
     void *img;
     int win_width;
     int win_heigth;
@@ -35,5 +32,12 @@ typedef struct s_data {
 	int score;
     t_map *map;
 } t_data;
+
+
+int     on_keypress(int keysym, t_data *data);
+t_map   *create_map(int fd, t_data *data);
+void    display(int fd, t_data *data);
+int     on_destroy(t_data *data);
+void    render_map(t_data *data);
 
 #endif
