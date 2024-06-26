@@ -6,7 +6,7 @@
 /*   By: waalexan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:05:09 by waalexan          #+#    #+#             */
-/*   Updated: 2024/06/26 18:16:19 by waalexan         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:10:04 by waalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+# define IMG_START_X 0
+# define IMG_START_Y 60
+
 # define SIZE_Q 60
 
 typedef struct s_map{
@@ -26,7 +29,7 @@ typedef struct s_map{
 	char	value;
 	int		pos_x;
 	int		pos_y;
-}	t_map;	
+}	t_map;
 
 typedef struct s_data {
 	void	*mlx;
@@ -42,8 +45,8 @@ typedef struct s_data {
 }	t_data;
 
 t_map	*create_map(int fd, t_data *data);
-int		on_keypress(int keysym, t_data *data);
-int		on_destroy(t_data *data);
+int	on_keypress(int keysym, t_data *data);
+int	on_destroy(t_data *data);
 void	render_map(t_data *data);
 void	display(int fd, t_data *data);
 

@@ -52,8 +52,6 @@ int	on_keypress(int keysym, t_data *data)
 {
 	int	current_x;
 	int	current_y;
-	int	width;
-	int	height;
 	int	i;
 
 	i = 0;
