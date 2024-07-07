@@ -6,7 +6,7 @@
 /*   By: waalexan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:55:41 by waalexan          #+#    #+#             */
-/*   Updated: 2024/06/27 14:17:04 by waalexan         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:30:03 by waalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,8 @@ int	move_cadete(int *i, int *current_x, int *current_y, t_data *data)
 	return (0);
 }
 
-int	on_keypress(int keysym, t_data *data)
+int	press_w_a_s_d(int keysym, t_data *data)
 {
-	int	current_x;
-	int	current_y;
-	int	i;
-
-	i = 0;
-	current_x = data->img_x;
-	current_y = data->img_y;
-	data->passo++;
 	if (keysym == 119)
 		data->img_y -= SIZE_Q;
 	else if (keysym == 115)
@@ -73,12 +65,29 @@ int	on_keypress(int keysym, t_data *data)
 		data->img_x -= SIZE_Q;
 	else if (keysym == 100)
 		data->img_x += SIZE_Q;
+	else if (keysym == 65307)
+		on_destroy(data);
+	else
+		return (0);
+	return (1);
+}
+
+int	on_keypress(int keysym, t_data *data)
+{
+	int	tmp_x;
+	int	tmp_y;
+	int	i;
+
+	i = 0;
+	tmp_x = data->img_x;
+	tmp_y = data->img_y;
+	data->passo++;
+	if (!press_w_a_s_d(keysym, data))
+		return (0);
 	while (i++ < data->win_width * data->win_heigth)
-		move_cadete(&i, &current_x, &current_y, data);
-	data->img = mlx_xpm_file_to_image(data->mlx, "assets/sombra.xpm",
-			&i, &i);
-	mlx_put_image_to_window(data->mlx, data->win, data->img,
-		current_x, current_y);
+		move_cadete(&i, &tmp_x, &tmp_y, data);
+	data->img = mlx_xpm_file_to_image(data->mlx, "assets/sombra.xpm", &i, &i);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, tmp_x, tmp_y);
 	render_map(data);
 	ft_printf("[PASSO] %dº passo\n", data->passo);
 	return (0);

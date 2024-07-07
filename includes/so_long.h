@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define SIZE_Q 60
+# define SIZE_Q 30
 
 typedef struct s_map{
 	void	*img;
@@ -45,6 +45,7 @@ typedef struct s_data {
 t_map	*create_map(int fd, t_data *data);
 int		on_keypress(int keysym, t_data *data);
 int		on_destroy(t_data *data);
+int		validar_map(char *path, t_data *data);
 void	render_map(t_data *data);
 void	display(int fd, t_data *data);
 
